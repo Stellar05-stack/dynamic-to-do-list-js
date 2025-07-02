@@ -1,0 +1,142 @@
+/**
+ * To-Do List Application
+ * Adds, displays, and removes tasks using DOM manipulation.
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
+  // ✅ Select DOM elements
+  const addButton = document.getElementById('add-task-btn');
+  const taskInput = document.getElementById('task-input');
+  const taskList = document.getElementById('task-list');
+
+  /**
+   * ✅ Function to add a new task
+   */
+  function addTask() {
+    // Get the user's input and trim whitespace
+    const taskText = taskInput.value.trim();
+
+    // If input is empty, alert the user
+    if (taskText === "") {
+      alert("Please enter a task.");
+      return;
+    }
+
+    // Create a new list item
+    const li = document.createElement('li');
+    li.textContent = taskText;
+
+    // Create a remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = "Remove";
+    removeBtn.className = 'remove-btn';
+
+    // When the remove button is clicked, delete the task
+    removeBtn.onclick = function () {
+      taskList.removeChild(li);
+    };
+
+    // Append the button to the task item
+    li.appendChild(removeBtn);
+
+    // Append the task to the list
+    taskList.appendChild(li);
+
+    // Clear the input field
+    taskInput.value = "";
+  }
+
+  // ✅ Add event listener for button click
+  addButton.addEventListener('click', addTask);
+
+  // ✅ Add event listener for Enter key
+  taskInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+      addTask();
+    }
+  });
+
+  // ✅ Invoke addTask once on DOM load as per instructions
+  addTask(); // Optional behavior; may initialize with an empty task
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#todo-app {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#task-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#add-task-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#add-task-btn:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #eeeeee;
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-btn {
+    cursor: pointer;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.remove-btn:hover {
+    background-color: #d9534f;
+}
